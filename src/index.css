@@ -1,0 +1,137 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* --- Premium Fonts via Google Fonts --- */
+@import url("https://fonts.googleapis.com/css2?family=Manrope:wght@300;400;500;600;700;800&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&family=Bodoni+Moda:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Fredoka:wght@400;500;600;700&family=Nunito:wght@400;500;600;700&family=Outfit:wght@200;300;400;500;600;700&family=Jost:wght@200;300;400;500;600&family=Inter:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap");
+
+:root {
+    --font-display: "Space Grotesk", "Manrope", system-ui, sans-serif;
+    --font-body: "Manrope", system-ui, sans-serif;
+}
+
+html, body {
+    margin: 0;
+    background: #FAFAFA;
+    color: #0A0A0A;
+    font-family: var(--font-body);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    overflow-x: hidden;
+}
+
+/* Theme font helpers */
+.font-romantic-h { font-family: "Cormorant Garamond", serif; font-style: italic; font-weight: 300; letter-spacing: -0.01em; }
+.font-romantic-b { font-family: "Outfit", sans-serif; font-weight: 300; }
+.font-elegant-h  { font-family: "Playfair Display", serif; font-weight: 500; letter-spacing: -0.01em; }
+.font-elegant-b  { font-family: "Manrope", sans-serif; font-weight: 400; }
+.font-playful-h  { font-family: "Fredoka", sans-serif; font-weight: 600; }
+.font-playful-b  { font-family: "Nunito", sans-serif; font-weight: 500; }
+.font-minimalist-h { font-family: "Space Grotesk", sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: 0.18em; }
+.font-minimalist-b { font-family: "Inter", sans-serif; letter-spacing: 0.02em; }
+.font-luxury-h   { font-family: "Bodoni Moda", serif; font-weight: 500; letter-spacing: -0.01em; }
+.font-luxury-b   { font-family: "Jost", sans-serif; font-weight: 300; text-transform: uppercase; letter-spacing: 0.2em; font-size: 0.78rem; }
+
+.font-display   { font-family: var(--font-display); }
+.font-display-bold { font-family: var(--font-display); font-weight: 700; letter-spacing: -0.02em; }
+
+/* Subtle grain overlay utility */
+.grain::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    opacity: 0.5;
+    mix-blend-mode: multiply;
+}
+
+/* Custom scrollbar (subtle) */
+::-webkit-scrollbar { width: 8px; height: 8px; }
+::-webkit-scrollbar-track { background: transparent; }
+::-webkit-scrollbar-thumb { background: rgba(0,0,0,0.15); border-radius: 4px; }
+::-webkit-scrollbar-thumb:hover { background: rgba(0,0,0,0.3); }
+
+/* Marquee for landing */
+@keyframes marquee {
+    from { transform: translateX(0); }
+    to { transform: translateX(-50%); }
+}
+.marquee-track { animation: marquee 40s linear infinite; }
+
+/* Floating balloons */
+@keyframes balloonRise {
+    0% { transform: translateY(110vh) rotate(-2deg); opacity: 0; }
+    8% { opacity: 1; }
+    100% { transform: translateY(-20vh) rotate(2deg); opacity: 0; }
+}
+.balloon {
+    position: absolute;
+    bottom: -80px;
+    width: 40px;
+    height: 50px;
+    border-radius: 50% 50% 45% 45%;
+    animation: balloonRise linear infinite;
+}
+.balloon::after {
+    content: "";
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    width: 1px;
+    height: 70px;
+    background: rgba(0,0,0,0.25);
+    transform: translateX(-50%);
+}
+
+/* Soft pulse */
+@keyframes softPulse {
+    0%, 100% { box-shadow: 0 0 0 0 rgba(255,255,255,0.4); }
+    50% { box-shadow: 0 0 0 14px rgba(255,255,255,0); }
+}
+.pulse-soft { animation: softPulse 2.4s ease-out infinite; }
+
+/* Shadcn vars */
+@layer base {
+    :root {
+        --background: 0 0% 100%;
+        --foreground: 0 0% 3.9%;
+        --card: 0 0% 100%;
+        --card-foreground: 0 0% 3.9%;
+        --popover: 0 0% 100%;
+        --popover-foreground: 0 0% 3.9%;
+        --primary: 0 0% 9%;
+        --primary-foreground: 0 0% 98%;
+        --secondary: 0 0% 96.1%;
+        --secondary-foreground: 0 0% 9%;
+        --muted: 0 0% 96.1%;
+        --muted-foreground: 0 0% 45.1%;
+        --accent: 0 0% 96.1%;
+        --accent-foreground: 0 0% 9%;
+        --destructive: 0 84.2% 60.2%;
+        --destructive-foreground: 0 0% 98%;
+        --border: 0 0% 89.8%;
+        --input: 0 0% 89.8%;
+        --ring: 0 0% 3.9%;
+        --radius: 0.6rem;
+    }
+}
+
+@layer base {
+    * { @apply border-border; }
+}
+
+@layer base {
+    [data-debug-wrapper="true"] { display: contents !important; }
+    [data-debug-wrapper="true"] > * {
+        margin-left: inherit; margin-right: inherit; margin-top: inherit; margin-bottom: inherit;
+        padding-left: inherit; padding-right: inherit; padding-top: inherit; padding-bottom: inherit;
+        column-gap: inherit; row-gap: inherit; gap: inherit;
+        border-left-width: inherit; border-right-width: inherit; border-top-width: inherit; border-bottom-width: inherit;
+        border-left-style: inherit; border-right-style: inherit; border-top-style: inherit; border-bottom-style: inherit;
+        border-left-color: inherit; border-right-color: inherit; border-top-color: inherit; border-bottom-color: inherit;
+    }
+}
