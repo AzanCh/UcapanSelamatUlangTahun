@@ -195,10 +195,7 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
         "content_type": file.content_type,
     }
 
-
-app.include_router(api_router)
-# Serve uploaded audio (and any future static uploads) under /api/uploads
-app.mount("/api/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
@@ -207,6 +204,14 @@ app.add_middleware(
     allow_methods=["*"],
     allow_headers=["*"],
 )
+
+api_router = APIRouter(prefix="/api")
+
+
+app.include_router(api_router)
+# Serve uploaded audio (and any future static uploads) under /api/uploads
+app.mount("/api/uploads", StaticFiles(directory=str(UPLOAD_DIR)), name="uploads")
+
 
 logging.basicConfig(level=logging.INFO,
                     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
