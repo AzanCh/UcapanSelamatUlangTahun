@@ -195,7 +195,7 @@ async def upload_image(request: Request, file: UploadFile = File(...)):
         "content_type": file.content_type,
     }
 
-app = FastAPI()
+
 
 app.add_middleware(
     CORSMiddleware,
@@ -205,7 +205,7 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-api_router = APIRouter(prefix="/api")
+
 
 
 app.include_router(api_router)
